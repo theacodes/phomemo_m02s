@@ -4,6 +4,7 @@
 
 import PIL
 import serial
+import socket
 
 from phomemo_m02s import _image_helper
 
@@ -15,12 +16,36 @@ GS = 0x1D
 US = 0x1F
 
 
+class BluSerial:
+    def __init__(self, mac, port):
+        self.sock = socket.socket(
+            socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM
+        )
+        self.sock.connect((mac, port))
+
+    def write(self, b):
+        if type(b) is list:
+            b = bytes(b)
+        self.sock.send(b)
+
+    def read(self, size):
+        return self.sock.recv(size)
+
+    def flush(self):
+        pass
+
+
 class Printer:
     # Figured out empirically
     MAX_WIDTH = 576
 
-    def __init__(self, port_name="/dev/tty.M02S"):
-        self.port = serial.Serial(port_name, timeout=10)
+    def __init__(self, port_name="/dev/tty.M02S", mac=None):
+        if mac is not None:
+            # the channel can be found by running `sdptool browse` but should be the same
+            self.port = BluSerial(mac, 6)
+
+        else:
+            self.port = serial.Serial(port_name, timeout=10)
 
     def write(self, bytes):
         self.port.write(bytes)
