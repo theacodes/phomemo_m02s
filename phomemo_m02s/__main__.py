@@ -32,6 +32,7 @@ if __name__ == "__main__":
     parser.add_argument("--test", action="store_true", default=False)
     parser.add_argument("--convert-only", action="store_true", default=False)
     parser.add_argument("--port", default="/dev/tty.M02S")
+    parser.add_argument("--mac", default=None)
 
     args = parser.parse_args()
 
@@ -44,7 +45,7 @@ if __name__ == "__main__":
         )
         sys.exit(0)
 
-    printer = phomemo_m02s.printer.Printer(args.port)
+    printer = phomemo_m02s.printer.Printer(args.port, args.mac)
     printer.initialize()
     printer.reset()
     print("Serial number:", printer.get_serial_number())
