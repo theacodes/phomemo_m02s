@@ -22,6 +22,17 @@ python3 -m phomemo_m02s /path/to/image.png
 
 You can use any format supported by `Pillow`. There are a few other options available, run `python3 -m phomemo_m02s --help` to see the full list.
 
+### Linux
+
+On linux it needs the MAC address of the printer to work because the serial port utilities were removed from bluez.
+Just connect to the printer as you would any other bluetooth device and then run `bluetoothctl paired-devices`, the second column contains the MAC address.
+
+To print an image, use the command as before, just add `--mac`:
+
+```sh
+python3 -m phomemo_m02s --mac 00:15:83:37:xx:xx /path/to/image.png
+```
+
 
 ## Contributing
 
