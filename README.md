@@ -33,6 +33,13 @@ To print an image, use the command as before, just add `--mac`:
 python3 -m phomemo_m02s --mac 00:15:83:37:xx:xx /path/to/image.png
 ```
 
+If the command above does not work you might need to pass the channel:
+
+```sh
+the channel can be found by running `sdptool browse` under Service Name: WeChat
+python3 -m phomemo_m02s --mac 00:15:83:37:xx:xx --channel 8 /path/to/image.png
+```
+
 
 ## Contributing
 

@@ -39,10 +39,10 @@ class Printer:
     # Figured out empirically
     MAX_WIDTH = 576
 
-    def __init__(self, port_name="/dev/tty.M02S", mac=None):
+    def __init__(self, port_name="/dev/tty.M02S", mac=None, channel=6):
         if mac is not None:
             # the channel can be found by running `sdptool browse` but should be the same
-            self.port = BluSerial(mac, 6)
+            self.port = BluSerial(mac, channel)
 
         else:
             self.port = serial.Serial(port_name, timeout=10)
