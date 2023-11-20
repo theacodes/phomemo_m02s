@@ -2,6 +2,8 @@
 # Published under the standard MIT License.
 # Full text available at: https://opensource.org/licenses/MIT
 
+from __future__ import annotations
+
 import PIL
 import serial
 import socket
