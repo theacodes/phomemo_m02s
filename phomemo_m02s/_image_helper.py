@@ -6,6 +6,7 @@ import math
 
 import PIL
 import PIL.Image
+import PIL.ImageOps
 
 def preprocess_image(src, width=512, save=False):
     src_w, src_h = src.size
