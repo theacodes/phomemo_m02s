@@ -33,6 +33,32 @@ To print an image, use the command as before, just add `--mac`:
 python3 -m phomemo_m02s --mac 00:15:83:37:xx:xx /path/to/image.png
 ```
 
+Alternatively, if the above doesn't work, you can connect the
+Bluetooth device to a serial port with `rfcomm`, then print direct
+to that.
+
+First connect the printer using its MAC address (likely needs to
+be done as root):
+
+```sh
+rfcomm connect /dev/rfcomm0 aa:bb:cc:dd:ee:ff
+```
+
+This will output text such as:
+
+```
+Connected /dev/rfcomm0 to aa:bb:cc:dd:ee:ff on channel 1
+Press CTRL-C for hangup
+```
+
+Leaving that running, print using the created port:
+
+```sh
+python3 -m phomemo_m02s --port /dev/rfcomm0 /path/to/image.png
+```
+
+When done, press `Ctrl-C` to remove the rfcomm port.
+
 
 ## Contributing
 
